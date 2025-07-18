@@ -2,6 +2,7 @@ import csv
 import os
 import sys
 from io import SEEK_END
+from dotenv import load_dotenv
 
 
 def opt():
@@ -12,16 +13,18 @@ def opt():
     print("4 - Exit")
     print("-="*20)
 
-
+#verify if the data.csv file exists
 def verify_file(file_name):
     if not os.path.exists(file_name):
-        print("The data.csv file does not exist or has a differnt name")
-        return False
+        with open(file_name, "w", newline="") as file:
+            writer = csv.writer(file)
+        return True
     if not os.access(file_name, os.R_OK | os.W_OK):
         print("The program don't have permission to modify data.csv")
         return False
     return True
 
+#display all the messages and dates
 def show_all(file_name):
     with open(file_name) as arq:
         read_csv = csv.reader(arq)
@@ -30,10 +33,11 @@ def show_all(file_name):
             print(str(i) + ". " + row[0] + " " + row[1] + "/" + row[2])
             i+=1
 
+#create a new message
 def new_row(file_name):
     with open(file_name, "r+", newline="") as arq:
         arq.seek(0, SEEK_END)
-        name = input("Type the message:")
+        name = input("Type the message: ")
         try:
             day = int(input("Type the day to remember: "))
             month = int(input("Type the month to remember: "))
@@ -57,6 +61,7 @@ def new_row(file_name):
         writer = csv.writer(arq)
         writer.writerow(new_list)
 
+#remove a message
 def remove_row(file_name):
     with open(file_name) as arq:
         list_csv = list(csv.reader(arq))
@@ -66,9 +71,9 @@ def remove_row(file_name):
         opt = int(input("Type the row to be removed: "))
         if opt >= 1 and opt <= len(list_csv):
             list_csv.pop(opt - 1)
-            with open(file_name, "w", newline="") as arq:
+            with open(file_name, "w", newline="") as arq: #this delete the old file
                 writer_csv = csv.writer(arq)
-                writer_csv.writerows(list_csv)
+                writer_csv.writerows(list_csv) #write the new file
         else:
             print("Type a valid row")
     except ValueError:
@@ -77,7 +82,8 @@ def remove_row(file_name):
 
 #main
 def main():
-    file_name = "data.csv"
+    load_dotenv()
+    file_name = os.getenv("FILE_NAME")
     if not verify_file(file_name):
         sys.exit()
     while True:
@@ -101,5 +107,5 @@ def main():
                 print("See you next time!")
                 break
 
-if __name__ == "__main__":
+if __name__ == "__main__": #it's purpouse it's to not call the main while calling the remove function in sender.py
     main()

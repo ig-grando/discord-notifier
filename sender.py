@@ -1,4 +1,5 @@
 from datetime import date
+from dotenv import load_dotenv
 import sys
 import os
 import csv
@@ -14,7 +15,8 @@ def verify_file(file_name):
     return True
 
 date = date.today()
-webhook_url = "https://discord.com/api/webhooks/1395093899948855357/RoyWnka6vUVKh9OOTHddbEkYvPy4q8pVYT7gRnTHVDfGXSg8Pru2HC3vibSzh8Ggf4at"
+load_dotenv()
+webhook_url = os.getenv("DISCORD_WEBHOOK")
 file_name = "data.csv"
 if not verify_file(file_name):
     sys.exit()
@@ -30,7 +32,7 @@ with open(file_name) as arq:
             if awnser.status_code ==  204:
                 print("Message send sucessfully")
             else:
-                print("Unable to send the message")
+                print("Unable to send the message:")
                 print(message)
             if int(list_csv[row][3]) == 1:
                 with open(file_name) as arq:
