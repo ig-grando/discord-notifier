@@ -26,8 +26,9 @@ with open(file_name) as arq:
     for row in range (len(list_csv) -1, -1, -1):
         if (date.day == int(list_csv[row][1])) and (date.month == int(list_csv[row][2])):
             message = list_csv[row][0]
+            bot_name = os.getenv("BOT_NAME")
             data_msg = {"content": message,
-                        "username": "Notifier"}
+                        "username": bot_name}
             awnser = requests.post(webhook_url, json=data_msg)
             if awnser.status_code ==  204:
                 print("Message send sucessfully")
