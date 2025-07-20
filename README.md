@@ -3,7 +3,7 @@
 
 This is a simple script that allows sending reminders to a Discord channel. It can be used for a variety of purposes, such as remembering friends birthdays, important dates, or simply annoying people with a bot on Discord.  
 Execution is easy: just create a new message in `msg_manager.py`, set a day and month to send it (or set the current date), and then run `sender.py`. Messages scheduled for that day will be sent, and a notification will pop up.  
-To make the script work, you need to set up a virtual environment (optional but highly recommended) and add the Discord webhook URL in the `.env` file, as shown below.
+To make the script work, you need to set up a virtual environment (optional but highly recommended) and add the Discord webhook URL in the `settings.json` file, as shown below.
 
 ---
 
@@ -29,11 +29,11 @@ pip install -r requirements.txt
 Then, copy the example environment file:
 
 ```bash
-cp .env.example .env
+cp settings.example.json settings.json
 ```
 
-Replace the example webhook URL with your actual Discord channel webhook URL in the `.env` file.  
-(If you don’t have your URL, follow the instructions below.)
+Replace the example webhook URL with your actual Discord channel webhook URL in the `settings.json` file.  
+(If you don’t have your URL, follow the instructions in the GIF.)
 
 ![Discord demonstration](assets/discord.gif)
 
@@ -47,7 +47,7 @@ To run the program that configures the reminders file, use this command (with th
 python3 msg_manager.py
 ```
 
-While running the manager, you can view, add, and remove reminders by following the on-screen instructions.  
+While running the manager, you can view, add, and remove reminders by following the on-screen instructions, they will be added in the `data.csv` file.  
 To send the messages scheduled for the current day, run:
 
 ```bash
