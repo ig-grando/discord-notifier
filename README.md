@@ -32,7 +32,7 @@ Then, copy the example environment file:
 cp .env.example .env
 ```
 
-Replace the example webhook URL with your actual Discord channel webhook URL in the .env file.  
+Replace the example webhook URL with your actual Discord channel webhook URL in the `.env` file.  
 (If you don’t have one, follow the instructions below.)
 
 ![Discord demonstration](assets/discord.gif)
