@@ -73,6 +73,8 @@ At the end of the file, add the time schedule and your configuration. For exampl
 
 Just remember to update the path to match your system!
 
+You can also change the name of the bot and the name of the data file in `settings.json`
+
 ---
 
 ## 🛠️ Future Plans
