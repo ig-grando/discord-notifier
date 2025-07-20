@@ -2,3 +2,4 @@ venv/
 .env
 data.csv
 todolist.md
+settings.json

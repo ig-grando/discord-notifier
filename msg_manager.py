@@ -1,8 +1,8 @@
 import csv
 import os
 import sys
+import json
 from io import SEEK_END
-from dotenv import load_dotenv
 
 
 def opt():
@@ -82,8 +82,9 @@ def remove_row(file_name):
 
 #main
 def main():
-    load_dotenv()
-    file_name = os.getenv("FILE_NAME")
+    with open("settings.json", "r") as file:
+        config = json.load(file)
+    file_name = config.get("FILE_NAME")
     if not verify_file(file_name):
         sys.exit()
     while True:

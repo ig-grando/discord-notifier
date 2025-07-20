@@ -1,0 +1,5 @@
+{
+    "DISCORD_WEBHOOK": "https://discord.com/api/webhooks/...",
+    "FILE_NAME": "data.csv",
+    "BOT_NAME": "Notifier"
+  }

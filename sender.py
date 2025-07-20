@@ -1,9 +1,9 @@
 from datetime import date
-from dotenv import load_dotenv
 import sys
 import os
 import csv
 import requests
+import json
 
 def verify_file(file_name):
     if not os.path.exists(file_name):
@@ -15,8 +15,9 @@ def verify_file(file_name):
     return True
 
 date = date.today()
-load_dotenv()
-webhook_url = os.getenv("DISCORD_WEBHOOK")
+with open("settings.json", "r") as file:
+    config = json.load(file)
+webhook_url = config.get("DISCORD_WEBHOOK")
 file_name = "data.csv"
 if not verify_file(file_name):
     sys.exit()
@@ -26,7 +27,7 @@ with open(file_name) as arq:
     for row in range (len(list_csv) -1, -1, -1):
         if (date.day == int(list_csv[row][1])) and (date.month == int(list_csv[row][2])):
             message = list_csv[row][0]
-            bot_name = os.getenv("BOT_NAME")
+            bot_name = config.get("BOT_NAME")
             data_msg = {"content": message,
                         "username": bot_name}
             awnser = requests.post(webhook_url, json=data_msg)
